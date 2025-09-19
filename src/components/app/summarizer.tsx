@@ -24,7 +24,7 @@ import {
 const formSchema = z.object({
   text: z
     .string()
-    .min(2000, { message: 'Please enter text with at least 2000 characters.' })
+    .min(50, { message: 'Please enter text with at least 50 characters.' })
     .max(20000, {
       message: 'Text is too long. Please use text with up to 20,000 characters.',
     }),
@@ -139,7 +139,7 @@ export default function Summarizer() {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste your long text here... (minimum 2000 characters)"
+                        placeholder="Paste your long text here... (minimum 50 characters)"
                         className="min-h-[300px] resize-y"
                         {...field}
                       />
