@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -37,7 +37,9 @@ export default function Summarizer() {
   const [summary, setSummary] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState('');
+  const [textareaHeight, setTextareaHeight] = useState(400);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const textInputRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -47,6 +49,18 @@ export default function Summarizer() {
       length: 'medium',
     },
   });
+
+  useEffect(() => {
+    if (textInputRef.current) {
+      const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          setTextareaHeight(entry.contentRect.height);
+        }
+      });
+      resizeObserver.observe(textInputRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
 
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
@@ -142,6 +156,10 @@ export default function Summarizer() {
                         placeholder="Paste your long text here... (maximum 2000 characters)"
                         className="min-h-[400px] resize-y"
                         {...field}
+                        ref={(e) => {
+                          field.ref(e);
+                          (textInputRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = e;
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -239,7 +257,7 @@ export default function Summarizer() {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="space-y-3 pt-2 min-h-[400px]">
+              <div className="space-y-3 pt-2" style={{ height: `${textareaHeight}px` }}>
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-[90%]" />
                 <Skeleton className="h-4 w-full" />
@@ -252,7 +270,8 @@ export default function Summarizer() {
                 readOnly
                 value={summary}
                 placeholder="Your summary will appear here."
-                className="min-h-[400px] resize-y bg-muted/30"
+                className="resize-y bg-muted/30"
+                style={{ height: `${textareaHeight}px` }}
               />
             )}
           </CardContent>
