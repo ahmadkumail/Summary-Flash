@@ -37,7 +37,7 @@ export default function Summarizer() {
   const [summary, setSummary] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState('');
-  const [textareaHeight, setTextareaHeight] = useState(400);
+  const [textareaHeight, setTextareaHeight] = useState<number | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textInputRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
@@ -52,6 +52,9 @@ export default function Summarizer() {
 
   useEffect(() => {
     if (textInputRef.current) {
+      // Set initial height
+      setTextareaHeight(textInputRef.current.offsetHeight);
+      
       const resizeObserver = new ResizeObserver(entries => {
         for (let entry of entries) {
           setTextareaHeight(entry.contentRect.height);
@@ -257,7 +260,7 @@ export default function Summarizer() {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="space-y-3 pt-2" style={{ height: `${textareaHeight}px` }}>
+              <div className="space-y-3 pt-2" style={{ height: textareaHeight ? `${textareaHeight}px` : '400px' }}>
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-[90%]" />
                 <Skeleton className="h-4 w-full" />
@@ -271,7 +274,7 @@ export default function Summarizer() {
                 value={summary}
                 placeholder="Your summary will appear here."
                 className="resize-y bg-muted/30"
-                style={{ height: `${textareaHeight}px` }}
+                style={{ height: textareaHeight ? `${textareaHeight}px` : '400px' }}
               />
             )}
           </CardContent>
