@@ -48,7 +48,7 @@ export default function Faq() {
       <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-headline">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight font-headline">
               Frequently Asked Questions
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
