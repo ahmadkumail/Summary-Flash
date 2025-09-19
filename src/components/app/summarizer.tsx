@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -25,8 +25,8 @@ const formSchema = z.object({
   text: z
     .string()
     .min(50, { message: 'Please enter text with at least 50 characters.' })
-    .max(2000, {
-      message: 'Text is too long. Please use text with up to 2,000 characters.',
+    .max(5000, {
+      message: 'Text is too long. Please use text with up to 5,000 characters.',
     }),
   length: z.enum(['short', 'medium', 'detailed']),
 });
@@ -139,7 +139,7 @@ export default function Summarizer() {
                   <FormItem className="flex-1 flex flex-col">
                     <FormControl className="flex-1">
                       <Textarea
-                        placeholder="Paste your long text here... (maximum 2000 characters)"
+                        placeholder="Paste your long text here... (maximum 5000 characters)"
                         className="min-h-[300px] resize-y h-full"
                         {...field}
                       />
@@ -252,7 +252,7 @@ export default function Summarizer() {
                 readOnly
                 value={summary}
                 placeholder="Your summary will appear here."
-                className="resize-y bg-muted/30 flex-1"
+                className="resize-y bg-muted/40 flex-1"
               />
             )}
           </CardContent>
