@@ -1,7 +1,8 @@
 
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export default function Header() {
   return (
@@ -11,18 +12,30 @@ export default function Header() {
           <Zap className="h-6 w-6 text-primary" />
           <span className="text-xl font-bold font-headline">SummaryFlash</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="/" passHref>
-            <Button variant="ghost">Home</Button>
+        <nav className="hidden md:flex items-center gap-2">
+          <Link
+            href="/"
+            className={cn(buttonVariants({ variant: 'ghost' }))}
+          >
+            Home
           </Link>
-          <Link href="/blogs" passHref>
-            <Button variant="ghost">Blogs</Button>
+          <Link
+            href="/blogs"
+            className={cn(buttonVariants({ variant: 'ghost' }))}
+          >
+            Blogs
           </Link>
-          <Link href="/faq" passHref>
-            <Button variant="ghost">FAQs</Button>
+          <Link
+            href="/faq"
+            className={cn(buttonVariants({ variant: 'ghost' }))}
+          >
+            FAQs
           </Link>
-          <Link href="/contact" passHref>
-            <Button variant="ghost">Contact Us</Button>
+          <Link
+            href="/contact"
+            className={cn(buttonVariants({ variant: 'ghost' }))}
+          >
+            Contact Us
           </Link>
         </nav>
       </div>
