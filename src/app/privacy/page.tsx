@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
-          <h1>Privacy Policy</h1>
+          <h1 className="font-bold">Privacy Policy</h1>
 
           <p>
             Your privacy is important to us. This policy explains what information we collect and how we use it.

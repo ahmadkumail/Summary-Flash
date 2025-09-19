@@ -8,7 +8,7 @@ export default function TermsOfService() {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
-          <h1>Terms of Service</h1>
+          <h1 className="font-bold">Terms of Service</h1>
 
           <h2>1. Use of Service</h2>
           <p>
