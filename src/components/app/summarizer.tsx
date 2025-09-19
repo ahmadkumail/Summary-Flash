@@ -11,11 +11,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Copy, FileUp, Sparkles, Trash2, X } from 'lucide-react';
+import { Copy, FileUp, Sparkles, Trash2 } from 'lucide-react';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,7 +24,7 @@ import {
 const formSchema = z.object({
   text: z
     .string()
-    .min(1000, { message: 'Please enter text with at least 1000 characters.' })
+    .min(2000, { message: 'Please enter text with at least 2000 characters.' })
     .max(20000, {
       message: 'Text is too long. Please use text with up to 20,000 characters.',
     }),
@@ -110,6 +109,11 @@ export default function Summarizer() {
   };
   
   const textValue = form.watch('text');
+  
+  const getWordCount = (text: string) => {
+    if (!text) return 0;
+    return text.trim().split(/\s+/).length;
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -117,9 +121,12 @@ export default function Summarizer() {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Your Text</span>
-            <Button variant="ghost" size="icon" onClick={clearText} disabled={!textValue || isLoading} aria-label="Clear text">
-              <Trash2 className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-2">
+              {textValue && <span className="text-sm font-normal text-muted-foreground">{getWordCount(textValue)} words</span>}
+              <Button variant="ghost" size="icon" onClick={clearText} disabled={!textValue || isLoading} aria-label="Clear text">
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -132,7 +139,7 @@ export default function Summarizer() {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste your long text here... (minimum 1000 characters)"
+                        placeholder="Paste your long text here... (minimum 2000 characters)"
                         className="min-h-[300px] resize-y"
                         {...field}
                       />
@@ -222,9 +229,12 @@ export default function Summarizer() {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>AI Summary</span>
-              <Button variant="ghost" size="icon" onClick={handleCopy} disabled={!summary || isLoading} aria-label="Copy summary">
-                <Copy className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-2">
+                {summary && <span className="text-sm font-normal text-muted-foreground">{getWordCount(summary)} words</span>}
+                <Button variant="ghost" size="icon" onClick={handleCopy} disabled={!summary || isLoading} aria-label="Copy summary">
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
             </CardTitle>
           </CardHeader>
           <CardContent className="min-h-[446px]">
