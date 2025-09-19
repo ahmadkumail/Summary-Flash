@@ -51,19 +51,20 @@ export default function Summarizer() {
   });
 
   useEffect(() => {
-    if (textInputRef.current) {
-      // Set initial height
-      setTextareaHeight(textInputRef.current.offsetHeight);
-      
+    const inputElement = textInputRef.current;
+    if (inputElement) {
       const resizeObserver = new ResizeObserver(entries => {
         for (let entry of entries) {
-          setTextareaHeight(entry.contentRect.height);
+          if (entry.target === inputElement) {
+            setTextareaHeight(entry.contentRect.height);
+          }
         }
       });
-      resizeObserver.observe(textInputRef.current);
+      resizeObserver.observe(inputElement);
       return () => resizeObserver.disconnect();
     }
-  }, []);
+  }, [textInputRef]);
+
 
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
