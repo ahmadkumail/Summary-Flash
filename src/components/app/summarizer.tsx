@@ -25,8 +25,8 @@ const formSchema = z.object({
   text: z
     .string()
     .min(50, { message: 'Please enter text with at least 50 characters.' })
-    .max(20000, {
-      message: 'Text is too long. Please use text with up to 20,000 characters.',
+    .max(2000, {
+      message: 'Text is too long. Please use text with up to 2,000 characters.',
     }),
   length: z.enum(['short', 'medium', 'detailed']),
 });
