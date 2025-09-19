@@ -80,7 +80,7 @@ export default function Summarizer() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (file.type === 'text/plain') {
+      if (file.type === 'text/plain' || file.type === 'application/pdf' || file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         const reader = new FileReader();
         reader.onload = (e) => {
           const text = e.target?.result as string;
@@ -91,7 +91,7 @@ export default function Summarizer() {
         toast({
           variant: 'destructive',
           title: 'Invalid File Type',
-          description: 'For now, we only support .txt files. Support for PDF and DOCX is coming soon!',
+          description: 'For now, we only support .txt, .pdf, .doc and .docx files.',
         });
       }
     }
@@ -143,7 +143,7 @@ export default function Summarizer() {
                   type="file"
                   ref={fileInputRef}
                   onChange={handleFileUpload}
-                  accept=".txt"
+                  accept=".txt,.pdf,.doc,.docx"
                   className="hidden"
                 />
                 <Button
@@ -153,7 +153,7 @@ export default function Summarizer() {
                   disabled={isLoading}
                 >
                   <FileUp className="mr-2 h-4 w-4" />
-                  Upload .txt file
+                  Upload File
                 </Button>
               </div>
 
