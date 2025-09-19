@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 export default function Footer() {
@@ -7,6 +8,9 @@ export default function Footer() {
         <div className="flex justify-center gap-6 mb-4">
           <Link href="/blogs" className="hover:text-primary">
             Blogs
+          </Link>
+          <Link href="/faq" className="hover:text-primary">
+            FAQs
           </Link>
           <Link href="/contact" className="hover:text-primary">
             Contact Us

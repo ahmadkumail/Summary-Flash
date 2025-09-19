@@ -1,3 +1,4 @@
+
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,14 @@ export default function Header() {
           <span className="text-xl font-bold font-headline">SummaryFlash</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
+          <Link href="/" passHref>
+            <Button variant="ghost">Home</Button>
+          </Link>
           <Link href="/blogs" passHref>
             <Button variant="ghost">Blogs</Button>
+          </Link>
+          <Link href="/faq" passHref>
+            <Button variant="ghost">FAQs</Button>
           </Link>
           <Link href="/contact" passHref>
             <Button variant="ghost">Contact Us</Button>
