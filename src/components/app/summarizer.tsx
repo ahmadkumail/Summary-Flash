@@ -140,7 +140,7 @@ export default function Summarizer() {
                     <FormControl>
                       <Textarea
                         placeholder="Paste your long text here... (maximum 2000 characters)"
-                        className="min-h-[300px] resize-y"
+                        className="min-h-[400px] resize-y"
                         {...field}
                       />
                     </FormControl>
@@ -237,9 +237,9 @@ export default function Summarizer() {
               </div>
             </CardTitle>
           </CardHeader>
-          <CardContent className="min-h-[446px]">
+          <CardContent>
             {isLoading ? (
-              <div className="space-y-3 pt-2">
+              <div className="space-y-3 pt-2 min-h-[400px]">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-[90%]" />
                 <Skeleton className="h-4 w-full" />
