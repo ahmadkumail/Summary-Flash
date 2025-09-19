@@ -139,7 +139,7 @@ export default function Summarizer() {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste your long text here... (minimum 50 characters)"
+                        placeholder="Paste your long text here... (maximum 2000 characters)"
                         className="min-h-[300px] resize-y"
                         {...field}
                       />
