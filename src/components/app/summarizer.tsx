@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Copy, FileUp, Sparkles, Trash2 } from 'lucide-react';
+import { Copy, FileUp, Sparkles, Trash2, X } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -36,6 +36,7 @@ type FormValues = z.infer<typeof formSchema>;
 export default function Summarizer() {
   const [summary, setSummary] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [fileName, setFileName] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -81,6 +82,7 @@ export default function Summarizer() {
     const file = event.target.files?.[0];
     if (file) {
       if (file.type === 'text/plain' || file.type === 'application/pdf' || file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        setFileName(file.name);
         const reader = new FileReader();
         reader.onload = (e) => {
           const text = e.target?.result as string;
@@ -103,6 +105,7 @@ export default function Summarizer() {
   const clearText = () => {
     form.reset({ text: '', length: form.getValues('length') });
     setSummary('');
+    setFileName('');
   };
   
   const textValue = form.watch('text');
@@ -138,23 +141,30 @@ export default function Summarizer() {
                 )}
               />
 
-              <div className="flex items-center justify-between gap-4">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileUpload}
-                  accept=".txt,.pdf,.doc,.docx"
-                  className="hidden"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={isLoading}
-                >
-                  <FileUp className="mr-2 h-4 w-4" />
-                  Upload File
-                </Button>
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
+                    accept=".txt,.pdf,.doc,.docx"
+                    className="hidden"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isLoading}
+                  >
+                    <FileUp className="mr-2 h-4 w-4" />
+                    Upload File
+                  </Button>
+                  {fileName && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted px-2 py-1 rounded-md">
+                      <span>{fileName}</span>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <FormField
