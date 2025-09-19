@@ -15,6 +15,7 @@ import { Copy, FileUp, Sparkles, Trash2, X } from 'lucide-react';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +25,7 @@ import {
 const formSchema = z.object({
   text: z
     .string()
-    .min(100, { message: 'Please enter text with at least 100 characters.' })
+    .min(1000, { message: 'Please enter text with at least 1000 characters.' })
     .max(20000, {
       message: 'Text is too long. Please use text with up to 20,000 characters.',
     }),
@@ -131,7 +132,7 @@ export default function Summarizer() {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste your long text here... (minimum 100 characters)"
+                        placeholder="Paste your long text here... (minimum 1000 characters)"
                         className="min-h-[300px] resize-y"
                         {...field}
                       />
@@ -141,30 +142,33 @@ export default function Summarizer() {
                 )}
               />
 
-              <div className="flex items-center justify-between gap-4 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileUpload}
-                    accept=".txt,.pdf,.doc,.docx"
-                    className="hidden"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => fileInputRef.current?.click()}
-                    disabled={isLoading}
-                  >
-                    <FileUp className="mr-2 h-4 w-4" />
-                    Upload File
-                  </Button>
-                  {fileName && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted px-2 py-1 rounded-md">
-                      <span>{fileName}</span>
-                    </div>
-                  )}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileUpload}
+                      accept=".txt,.pdf,.doc,.docx"
+                      className="hidden"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isLoading}
+                    >
+                      <FileUp className="mr-2 h-4 w-4" />
+                      Upload File
+                    </Button>
+                    {fileName && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted px-2 py-1 rounded-md">
+                        <span>{fileName}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
+                <p className="text-xs text-muted-foreground">Supported file types: .txt, .pdf, .doc, .docx</p>
               </div>
 
               <FormField
