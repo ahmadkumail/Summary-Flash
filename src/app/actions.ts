@@ -1,6 +1,6 @@
 "use server";
 
-import { generateSummary } from "@/ai/flows/generate-summary";
+import { generateSummary, GenerateSummaryInput } from "@/ai/flows/generate-summary";
 import { formSchema } from "@/lib/schemas";
 import { z } from "zod";
 

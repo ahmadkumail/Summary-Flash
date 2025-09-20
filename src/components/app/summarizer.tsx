@@ -131,7 +131,7 @@ export default function Summarizer() {
                   <FormItem className="flex-1 flex flex-col">
                     <FormControl className="flex-1">
                       <Textarea
-                        placeholder="Paste your long text here... (maximum 5000 words)"
+                        placeholder="Paste your long text here... (minimum 10 words, maximum 5000 words)"
                         className="min-h-[300px] resize-y h-full"
                         {...field}
                       />
