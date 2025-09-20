@@ -1,12 +1,6 @@
 "use server";
 
 import { generateSummary, GenerateSummaryInput } from "@/ai/flows/generate-summary";
-import { z } from "zod";
-
-const SummarizeSchema = z.object({
-  text: z.string(),
-  length: z.enum(["short", "medium", "detailed"]),
-});
 
 export async function handleSummarize(values: GenerateSummaryInput) {
   try {
