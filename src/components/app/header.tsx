@@ -35,10 +35,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'px-3 py-2 text-sm font-medium rounded-md transition-colors',
-                pathname === item.href
-                  ? 'bg-secondary text-secondary-foreground'
-                  : 'text-muted-foreground hover:bg-secondary/50'
+                'px-3 py-2 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:bg-secondary/50'
               )}
             >
               {item.label}
@@ -66,10 +63,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      'block px-3 py-2 text-base font-medium rounded-md',
-                      pathname === item.href
-                        ? 'bg-secondary text-secondary-foreground'
-                        : 'text-muted-foreground hover:bg-secondary/50'
+                      'block px-3 py-2 text-base font-medium rounded-md text-muted-foreground hover:bg-secondary/50'
                     )}
                   >
                     {item.label}
