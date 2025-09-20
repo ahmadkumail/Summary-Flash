@@ -32,7 +32,19 @@ const prompt = ai.definePrompt({
   name: 'generateSummaryPrompt',
   input: {schema: GenerateSummaryInputSchema},
   output: {schema: GenerateSummaryOutputSchema},
-  prompt: `You are a highly skilled AI text summarizer. Please provide a summary of the following text. The summary should be {{{length}}} in length.
+  prompt: `You are a highly skilled AI text summarizer.
+
+Please provide a summary of the following text.
+
+{{#if (eq length "short")}}
+The summary should be 1 sentence long.
+{{/if}}
+{{#if (eq length "medium")}}
+The summary should be 3 sentences long.
+{{/if}}
+{{#if (eq length "detailed")}}
+The summary should be 5 sentences long.
+{{/if}}
 
 Text: {{{text}}}`,
 });
