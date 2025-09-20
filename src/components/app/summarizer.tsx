@@ -54,6 +54,8 @@ export default function Summarizer() {
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
     setSummary('');
+
+    // This is already validated by the resolver.
     const result = await handleSummarize(data);
     setIsLoading(false);
 

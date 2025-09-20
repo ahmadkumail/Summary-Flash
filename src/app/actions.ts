@@ -1,6 +1,6 @@
 "use server";
 
-import { generateSummary } from "@/ai/flows/generate-summary";
+import { generateSummary, GenerateSummaryInput } from "@/ai/flows/generate-summary";
 import { z } from "zod";
 
 const SummarizeSchema = z.object({
@@ -8,15 +8,9 @@ const SummarizeSchema = z.object({
   length: z.enum(["short", "medium", "detailed"]),
 });
 
-export async function handleSummarize(values: z.infer<typeof SummarizeSchema>) {
-  const validatedFields = SummarizeSchema.safeParse(values);
-
-  if (!validatedFields.success) {
-    return { error: "Invalid input." };
-  }
-
+export async function handleSummarize(values: GenerateSummaryInput) {
   try {
-    const result = await generateSummary(validatedFields.data);
+    const result = await generateSummary(values);
     return { summary: result.summary };
   } catch (error) {
     console.error("Error generating summary:", error);
