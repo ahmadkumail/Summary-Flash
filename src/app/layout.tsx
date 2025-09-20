@@ -17,9 +17,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'SummaryFlash - AI Summarizer for Any Language',
+  title: 'Instant AI Summarizer for Any Text & Language | SummaryFlash',
   description:
-    'Instantly summarize long texts, articles, and documents in any language with our free AI-powered summarizer tool. Get short, medium, or detailed summaries in seconds.',
+    'Save time with SummaryFlash! Our free AI tool instantly summarizes long texts, articles, and documents in any language. Get short, medium, or detailed summaries in seconds.',
   keywords: [
     'text summarizer',
     'ai summarizer',
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     'summarize in any language',
     'multilingual summarizer',
     'free summarizer tool',
+    'instant summary',
   ],
 };
 
