@@ -24,9 +24,12 @@ import {
 const formSchema = z.object({
   text: z
     .string()
-    .min(50, { message: 'Please enter text with at least 50 characters.' })
-    .max(5000, {
-      message: 'Text is too long. Please use text with up to 5,000 characters.',
+    .min(1, { message: 'Please enter some text.' })
+    .refine((text) => text.trim().split(/\s+/).length >= 10, {
+      message: 'Please enter text with at least 10 words.',
+    })
+    .refine((text) => text.trim().split(/\s+/).length <= 5000, {
+      message: 'Text is too long. Please use text with up to 5,000 words.',
     }),
   length: z.enum(['short', 'medium', 'detailed']),
 });
@@ -112,7 +115,7 @@ export default function Summarizer() {
   
   const getWordCount = (text: string) => {
     if (!text) return 0;
-    return text.trim().split(/\s+/).length;
+    return text.trim().split(/\s+/).filter(Boolean).length;
   };
 
   return (
@@ -139,7 +142,7 @@ export default function Summarizer() {
                   <FormItem className="flex-1 flex flex-col">
                     <FormControl className="flex-1">
                       <Textarea
-                        placeholder="Paste your long text here... (maximum 5000 characters)"
+                        placeholder="Paste your long text here... (maximum 5000 words)"
                         className="min-h-[300px] resize-y h-full"
                         {...field}
                       />
