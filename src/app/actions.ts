@@ -1,8 +1,10 @@
 "use server";
 
-import { generateSummary, GenerateSummaryInput } from "@/ai/flows/generate-summary";
+import { generateSummary } from "@/ai/flows/generate-summary";
+import { formSchema } from "@/lib/schemas";
+import { z } from "zod";
 
-export async function handleSummarize(values: GenerateSummaryInput) {
+export async function handleSummarize(values: z.infer<typeof formSchema>) {
   try {
     const result = await generateSummary(values);
     return { summary: result.summary };
