@@ -29,53 +29,55 @@ export default function Header() {
           <Zap className="h-6 w-6 text-primary" />
           <span className="text-xl font-bold font-headline">SummaryFlash</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                buttonVariants({
-                  variant: pathname === item.href ? 'secondary' : 'ghost',
-                })
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Open Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <div className="flex flex-col gap-4 p-4">
-              <Link href="/" className="flex items-center gap-2 mb-4">
-                <Zap className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold font-headline">SummaryFlash</span>
+        <div className="flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  buttonVariants({
+                    variant: pathname === item.href ? 'secondary' : 'ghost',
+                  })
+                )}
+              >
+                {item.label}
               </Link>
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      buttonVariants({
-                        variant: pathname === item.href ? 'secondary' : 'ghost',
-                        size: 'lg'
-                      }),
-                      'justify-start'
-                    )}
-                  >
-                    {item.label}
+            ))}
+          </nav>
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Open Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <div className="flex flex-col gap-4 p-4">
+                  <Link href="/" className="flex items-center gap-2 mb-4">
+                    <Zap className="h-6 w-6 text-primary" />
+                    <span className="text-xl font-bold font-headline">SummaryFlash</span>
                   </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        buttonVariants({
+                          variant: pathname === item.href ? 'secondary' : 'ghost',
+                          size: 'lg'
+                        }),
+                        'justify-start'
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
