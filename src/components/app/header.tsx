@@ -1,10 +1,21 @@
+'use client';
 
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/blogs', label: 'Blogs' },
+    { href: '/faq', label: 'FAQs' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
   return (
     <header className="py-4 px-4 sm:px-6 lg:px-8 bg-card border-b sticky top-0 z-20">
       <div className="container mx-auto flex items-center justify-between">
@@ -13,30 +24,19 @@ export default function Header() {
           <span className="text-xl font-bold font-headline">SummaryFlash</span>
         </Link>
         <nav className="hidden md:flex items-center gap-2">
-          <Link
-            href="/"
-            className={cn(buttonVariants({ variant: 'ghost' }))}
-          >
-            Home
-          </Link>
-          <Link
-            href="/blogs"
-            className={cn(buttonVariants({ variant: 'ghost' }))}
-          >
-            Blogs
-          </Link>
-          <Link
-            href="/faq"
-            className={cn(buttonVariants({ variant: 'ghost' }))}
-          >
-            FAQs
-          </Link>
-          <Link
-            href="/contact"
-            className={cn(buttonVariants({ variant: 'ghost' }))}
-          >
-            Contact Us
-          </Link>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                buttonVariants({
+                  variant: pathname === item.href ? 'secondary' : 'ghost',
+                })
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>
