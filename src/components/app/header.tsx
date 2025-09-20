@@ -3,7 +3,7 @@
 import { Menu, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
   Sheet,
@@ -16,7 +16,6 @@ export default function Header() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/blogs', label: 'Blogs' },
     { href: '/faq', label: 'FAQs' },
     { href: '/contact', label: 'Contact Us' },
   ];
@@ -36,9 +35,10 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                buttonVariants({
-                  variant: pathname === item.href ? 'secondary' : 'ghost',
-                })
+                'px-3 py-2 text-sm font-medium rounded-md transition-colors',
+                pathname === item.href
+                  ? 'bg-secondary text-secondary-foreground'
+                  : 'text-muted-foreground hover:bg-secondary/50'
               )}
             >
               {item.label}
@@ -66,11 +66,10 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      buttonVariants({
-                        variant: pathname === item.href ? 'secondary' : 'ghost',
-                        size: 'lg'
-                      }),
-                      'justify-start'
+                      'block px-3 py-2 text-base font-medium rounded-md',
+                      pathname === item.href
+                        ? 'bg-secondary text-secondary-foreground'
+                        : 'text-muted-foreground hover:bg-secondary/50'
                     )}
                   >
                     {item.label}
