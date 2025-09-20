@@ -55,7 +55,6 @@ export default function Summarizer() {
     setIsLoading(true);
     setSummary('');
 
-    // This is already validated by the resolver.
     const result = await handleSummarize(data);
     setIsLoading(false);
 
@@ -220,7 +219,7 @@ export default function Summarizer() {
                 )}
               />
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full" disabled={isLoading || !form.formState.isValid}>
                 <Sparkles className="mr-2 h-4 w-4" />
                 {isLoading ? 'Summarizing...' : 'Summarize Now'}
               </Button>
